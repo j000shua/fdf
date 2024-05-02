@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/03/27 14:38:29 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:45:40 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ int	check_file(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	//int	fd;
+	int		fd;
+	t_point	*points;
 
-	(void)ac;
-	(void)av;
-/* 	fd = check_file(ac, av);
+	fd = check_file(ac, av);
 	if (fd == -1)
 		return (1);
-	close (fd); */
+	points = parse_file(fd);
+	if (points == NULL)
+		return (1);
 	if (mlx_lestgo() == -1)
 		return (printfd(2, "prout\n"), 1);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/14 12:27:08 by jlinguet          #+#    #+#              #
-#    Updated: 2024/03/29 16:22:54 by jlinguet         ###   ########.fr        #
+#    Updated: 2024/05/02 18:09:05 by jlinguet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ INC = fdf.h
 
 SRC = fdf.c \
       mlx_letsgo.c \
-	  draw_line.c
+	  draw_line.c \
+	  parse_file.c
 vpath %.c $(dir $(SRC))
 
 OBJ_DIR = obj
@@ -25,7 +26,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(notdir ${SRC:.c=.o}))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -I.
 
-MLXFLAGS = -Lminilibx -lmlx -lXext -lX11 -lm
+MLXFLAGS = -L../minilibx -lmlx -lXext -lX11 -lm
 
 $(OBJ_DIR)/%.o: %.c $(INC)
 	@mkdir -p ${OBJ_DIR}

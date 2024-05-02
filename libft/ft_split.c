@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:59:37 by jlinguet          #+#    #+#             */
-/*   Updated: 2023/11/13 10:59:40 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:38:21 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ static int	ft_count_words(char *s, char sep)
 	return (n);
 }
 
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
@@ -39,7 +52,7 @@ char	**ft_split(char const *s, char c)
 	if (!tab)
 		return (NULL);
 	i = 0;
-	itab = 0;
+	itab = -1;
 	len = 0;
 	while (s[i])
 	{
@@ -47,12 +60,12 @@ char	**ft_split(char const *s, char c)
 			len++;
 		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
 		{
-			tab[itab] = ft_substr(s, i - len + 1, len);
-			itab++;
+			tab[++itab] = ft_substr(s, i - len + 1, len);
+			if (tab[itab] == NULL)
+				return (free_tab(tab), NULL);
 			len = 0;
 		}
 		i++;
 	}
-	tab[itab] = NULL;
 	return (tab);
 }

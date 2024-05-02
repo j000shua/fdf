@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:31:18 by jlinguet          #+#    #+#             */
-/*   Updated: 2023/11/15 09:32:00 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:40:48 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
+void	free_tab(char **tab);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
