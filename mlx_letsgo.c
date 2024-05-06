@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:22:07 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/02 18:45:42 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:31:06 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	quit_prog(t_fdf *fdf)
 
 int	key(int keycode, t_fdf *fdf)
 {
-	if (keycode == 65307)
+	if (keycode == ECHAP_KEY)
 		quit_prog(fdf);
 	return (0);
 }
@@ -40,7 +40,7 @@ int	mlx_lestgo(void)
 	if (fdf.win == NULL)
 		return (free(fdf.mlx), -1);
 	mlx_key_hook(fdf.win, key, &fdf);
-	mlx_hook(fdf.win, 17, 1L << 17, quit_prog, &fdf);
+	mlx_hook(fdf.win, CROSS_BUTTON, CROSS_CLICKED, quit_prog, &fdf);
 	mlx_loop(fdf.mlx);
 	return (0);
 }

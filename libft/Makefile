@@ -33,7 +33,8 @@ SRCS = ft_strlen.c \
        ft_memcmp.c \
        ft_memmove.c \
        ft_strlcpy.c \
-       ft_strlcat.c
+       ft_strlcat.c \
+	   get_next_line.c
 
 OBJS = ${SRCS:.c=.o}
 
