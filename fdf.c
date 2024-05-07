@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 09:39:49 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:16:15 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ int	check_file(int ac, char **av)
 	if (len <= 4 || ft_strncmp(&av[1][len - 4], ".fdf", 4))
 		return (printfd(2, "File must be *.fdf\n"), -1);
 	fd = open(av[1], O_DIRECTORY);
-	close(fd);
 	if (fd > 0)
 	{
 		ft_putstr_fd(av[1], 2);
 		ft_putstr_fd(": Is a directory\n", 2);
-		return (-1);
+		return (close(fd), -1);
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
@@ -80,7 +79,7 @@ int	main(int ac, char **av)
 		return (printfd(2, "error :(\n"), clear_pts(&pts), 1);
 	if (!pts)
 		return (0);
-	print_points(pts);
+	//print_points(pts);
 /* 	if (mlx_lestgo() == -1)
 		return (printfd(2, "prout\n"), 1); */
 	return (0);

@@ -6,7 +6,7 @@
 #    By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/14 12:27:08 by jlinguet          #+#    #+#              #
-#    Updated: 2024/05/07 09:01:53 by jlinguet         ###   ########.fr        #
+#    Updated: 2024/05/07 11:26:21 by jlinguet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(OBJ_DIR)/%.o: %.c $(INC)
 
 all : libft ${NAME} 
 
-${NAME} : ${OBJ}
+${NAME} : ${OBJ} libft/libft.a
 	${CC} ${CFLAGS}  $^ -o ${NAME} -Llibft -lft $(MLXFLAGS)
 
 clean :

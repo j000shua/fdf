@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:59:37 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 08:48:26 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:10:20 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ void	free_tab(char **tab)
 {
 	int	i;
 
-	i = 0;
-	while (tab[i])
+	if (tab)
 	{
-		free(tab[i]);
-		i++;
+		i = 0;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	free(tab);
 }
 
 /* char	**ft_split(char const *s, char c)
