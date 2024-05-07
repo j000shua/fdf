@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/06 17:26:57 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:19:48 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int		mlx_lestgo(void);
 void	draw_line(t_fdf fdf, t_point a, t_point b);
 
 int		parse_file(int fd, t_point **pts);
+
+void	ft_3Dify(t_point *pts);
 
 #endif

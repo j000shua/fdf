@@ -6,7 +6,7 @@
 #    By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/14 12:27:08 by jlinguet          #+#    #+#              #
-#    Updated: 2024/05/07 11:26:21 by jlinguet         ###   ########.fr        #
+#    Updated: 2024/05/07 15:38:36 by jlinguet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ INC = fdf.h
 SRC = fdf.c \
       mlx_letsgo.c \
 	  draw_line.c \
-	  parse_file.c
+	  parse_file.c \
+	  matrix.c
 vpath %.c $(dir $(SRC))
 
 OBJ_DIR = obj
