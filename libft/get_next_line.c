@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:10:45 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/06 15:19:45 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 08:42:35 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	s[i] = '\0';
 	return (free(s1), s);
 }
-
 
 int	reading(size_t *nbr, int *fd, char *buf, char **line)
 {

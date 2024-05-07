@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/06 17:25:21 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:39:49 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,42 @@ void	print_points(t_point *lst)
 {
 	int	i;
 
+	// a enlever
 	i = 0;
 	while (lst)
 	{
-		printf("[point %i] x = %f, y = %f, z = %f\n", i++, lst->x, lst->y, lst->z);
+		printf("[point %i] x = %f, y = %f, z = %f\n",
+			i++, lst->x, lst->y, lst->z);
 		lst = lst->next;
+	}
+}
+
+void	clear_pts(t_point **pts)
+{
+	t_point	*next;
+
+	while (*pts)
+	{
+		next = (*pts)->next;
+		free(*pts);
+		*pts = next;
 	}
 }
 
 int	main(int ac, char **av)
 {
 	int		fd;
-	t_point	*points;
+	t_point	*pts;
 
 	fd = check_file(ac, av);
 	if (fd == -1)
 		return (1);
-	points = NULL;
-	if (parse_file(fd, &points) == -1)
-		return (printfd(2, "alloc error\n"), 1);
-	if (!points)
+	pts = NULL;
+	if (parse_file(fd, &pts) == -1)
+		return (printfd(2, "error :(\n"), clear_pts(&pts), 1);
+	if (!pts)
 		return (0);
-	print_points(points);
+	print_points(pts);
 /* 	if (mlx_lestgo() == -1)
 		return (printfd(2, "prout\n"), 1); */
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:22:07 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/06 17:31:06 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:08:24 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	mlx_lestgo(void)
 	fdf.mlx = mlx_init();
 	if (fdf.mlx == NULL)
 		return (-1);
-	fdf.win = mlx_new_window(fdf.mlx, 1000, 1000, "fdf"); // taille a determiner (+ mettre en titre le nom du ficher)
+	fdf.win = mlx_new_window(fdf.mlx, 1000, 1000, "fdf");
+	// taille a determiner (+ mettre en titre le nom du ficher)
 	if (fdf.win == NULL)
 		return (free(fdf.mlx), -1);
 	mlx_key_hook(fdf.win, key, &fdf);

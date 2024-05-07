@@ -6,7 +6,7 @@
 #    By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/14 12:27:08 by jlinguet          #+#    #+#              #
-#    Updated: 2024/05/02 18:09:05 by jlinguet         ###   ########.fr        #
+#    Updated: 2024/05/07 09:01:53 by jlinguet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,10 @@ $(OBJ_DIR)/%.o: %.c $(INC)
 	@mkdir -p ${OBJ_DIR}
 	${CC} ${CFLAGS} -c $< -o $@ 
 
-${NAME} : ${OBJ} 
-	@make -C libft
-	${CC} ${CFLAGS}  $^ -o ${NAME} -Llibft -lft $(MLXFLAGS)
+all : libft ${NAME} 
 
-all : ${NAME}
+${NAME} : ${OBJ}
+	${CC} ${CFLAGS}  $^ -o ${NAME} -Llibft -lft $(MLXFLAGS)
 
 clean :
 	make $@ -C libft
@@ -48,4 +47,7 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+libft :
+	make -C libft
+
+.PHONY : all clean fclean re libft

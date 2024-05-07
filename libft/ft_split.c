@@ -6,13 +6,13 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 10:59:37 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/02 19:38:21 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/07 08:48:26 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(char *s, char sep)
+/* static int	ft_count_words(char *s, char sep)
 {
 	int	i;
 	int	n;
@@ -26,7 +26,7 @@ static int	ft_count_words(char *s, char sep)
 		i++;
 	}
 	return (n);
-}
+} */
 
 void	free_tab(char **tab)
 {
@@ -41,7 +41,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-char	**ft_split(char const *s, char c)
+/* char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		i;
@@ -59,6 +59,51 @@ char	**ft_split(char const *s, char c)
 		if (s[i] != c)
 			len++;
 		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
+		{
+			tab[++itab] = ft_substr(s, i - len + 1, len);
+			if (tab[itab] == NULL)
+				return (free_tab(tab), NULL);
+			len = 0;
+		}
+		i++;
+	}
+	return (tab);
+} */
+
+static int	ft_count_words(char *s, char *set)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (s[i])
+	{
+		if (!ft_strchr(set, s[i]) && (ft_strchr(set, s[i + 1]) || !s[i + 1]))
+			n++;
+		i++;
+	}
+	return (n);
+}
+
+char	**ft_split(char const *s, char *set)
+{
+	char	**tab;
+	int		i;
+	int		itab;
+	int		len;
+
+	tab = ft_calloc((ft_count_words((char *)s, set) + 1), sizeof(char *));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	itab = -1;
+	len = 0;
+	while (s[i])
+	{
+		if (!ft_strchr(set, s[i]))
+			len++;
+		if (!ft_strchr(set, s[i]) && (ft_strchr(set, s[i + 1]) || !s[i + 1]))
 		{
 			tab[++itab] = ft_substr(s, i - len + 1, len);
 			if (tab[itab] == NULL)
