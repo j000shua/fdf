@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:18:32 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 15:57:10 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:08:35 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate_y(t_point **p, float y)
 	cos_y = cos(y);
 	sin_y = sin(y);
 
-	(*p)->x = (cos_y * r.x) + (-sin_y * r.z);
+	(*p)->x_p = (cos_y * r.x) + (-sin_y * r.z);
 	(*p)->z = (sin_y * r.x) + (cos_y * r.z);
 }
 
@@ -36,7 +36,7 @@ void	rotate_x(t_point **p, float x)
 	cos_x = cos(x);
 	sin_x = sin(x);
 
-	(*p)->y = (cos_x * r.y) + (sin_x * r.z);
+	(*p)->y_p = (cos_x * r.y) + (sin_x * r.z);
 	(*p)->z = (-sin_x * r.y) + (cos_x * r.z);
 }
 

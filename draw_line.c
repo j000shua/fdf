@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlinguet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:05:30 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/04/23 16:05:33 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:05:53 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	draw_line(t_fdf fdf, t_point a, t_point b)
 	float	dy;
 	float	steps;
 
-	dx = b.x - a.x;
-	dy = b.y - a.y;
+	dx = b.x_p - a.x_p;
+	dy = b.y_p - a.y_p;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
 	else
@@ -28,9 +28,9 @@ void	draw_line(t_fdf fdf, t_point a, t_point b)
 	dy /= steps;
 	while (steps > 0)
 	{
-		mlx_pixel_put(fdf.mlx, fdf.win, round(a.x), round(a.y), PIXEL_COLOR);
-		a.x += dx;
-		a.y += dy;
+		mlx_pixel_put(fdf.mlx, fdf.win, round(a.x_p), round(a.y_p), PIXEL_COLOR);
+		a.x_p += dx;
+		a.y_p += dy;
 		steps--;
 	}
 }

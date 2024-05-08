@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 14:19:48 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:03:51 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_point {
 	float			x;
 	float			y;
 	float			z;
+	float			x_p;
+	float			y_p;
 	struct s_point	*next;
 }	t_point;
 
@@ -52,7 +54,7 @@ typedef struct s_point {
 
 # define PIXEL_COLOR 255
 
-int		mlx_lestgo(void);
+int		mlx_lestgo(t_point *pts);
 
 void	draw_line(t_fdf fdf, t_point a, t_point b);
 

@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:22:07 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 09:08:24 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:37:31 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,32 @@ int	key(int keycode, t_fdf *fdf)
 	return (0);
 }
 
-int	mlx_lestgo(void)
+void	draw_grid(t_fdf fdf, t_point *pts)
+{
+	float 	max_x;
+	float	i;
+	t_point	*up;
+
+	max_x = pts->x / 200 + 1;
+	i = 0;
+	up = pts;
+	while (pts->next)
+	{
+		if (pts->x != 0)
+			draw_line(fdf, *pts, *pts->next);
+ 		if (pts->y != 0)
+		{
+			while (i++ < max_x)
+				up = up->next;
+			draw_line(fdf, *pts, *up);
+			i = 0;
+		}
+		pts = pts->next;
+		up = pts;
+	}
+}
+
+int	mlx_lestgo(t_point *pts)
 {
 	int		scroll;
 	t_fdf	fdf;
@@ -40,8 +65,15 @@ int	mlx_lestgo(void)
 	// taille a determiner (+ mettre en titre le nom du ficher)
 	if (fdf.win == NULL)
 		return (free(fdf.mlx), -1);
+	draw_grid(fdf, pts);	
 	mlx_key_hook(fdf.win, key, &fdf);
 	mlx_hook(fdf.win, CROSS_BUTTON, CROSS_CLICKED, quit_prog, &fdf);
+/* 	while (pts->next)
+	{
+		draw_line(fdf, *pts, *pts->next);
+		pts = pts->next;
+	} */
+	
 	mlx_loop(fdf.mlx);
 	return (0);
 }
