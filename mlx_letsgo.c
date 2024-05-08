@@ -54,10 +54,8 @@ void	draw_grid(t_fdf fdf, t_point *pts)
 
 int	mlx_lestgo(t_point *pts)
 {
-	int		scroll;
 	t_fdf	fdf;
 
-	scroll = 0;
 	fdf.mlx = mlx_init();
 	if (fdf.mlx == NULL)
 		return (-1);

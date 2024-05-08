@@ -31,7 +31,7 @@
 # include <string.h>
 # include <errno.h>
 
-# include "../minilibx/mlx.h"
+# include "../mlx/mlx.h"
 # include <math.h>
 
 typedef struct s_fdf {

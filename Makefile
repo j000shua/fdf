@@ -27,7 +27,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(notdir ${SRC:.c=.o}))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -I.
 
-MLXFLAGS = -L../minilibx -lmlx -lXext -lX11 -lm
+MLXFLAGS = -L../mlx -lmlx -lXext -lX11 -lm
 
 $(OBJ_DIR)/%.o: %.c $(INC)
 	@mkdir -p ${OBJ_DIR}
