@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/08 15:27:42 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:18:08 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int	main(int ac, char **av)
 		return (printfd(2, "error :(\n"), clear_pts(&pts), 1);
 	if (!pts)
 		return (0);
-	print_points(pts);
-	printf("\n\n");
+	//print_points(pts);
+	//printf("\n\n");
 	ft_3Dify(pts);
-	print_points(pts);
+	//print_points(pts);
 	if (mlx_lestgo(pts) == -1)
 		return (printfd(2, "prout\n"), clear_pts(&pts), 1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:24:56 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/08 14:32:44 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:26:05 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,19 @@ int	parse_file(int fd, t_point **pts)
 	float	y;
 
 	line = get_next_line(fd);
-	y = 0;
-	while (line)
+	y = -1;
+	while (y++, line)
 	{
 		vals = ft_split(line, " \t\n\v\f\r");
-		free(line);
-		if (!vals || !*vals)
+		//free(line);
+		if (free(line), !vals || !*vals)
 			return (free_tab(vals), -1);
 		x = -1;
 		while (vals[++x])
-		{
-			if (add_point(pts, x*200, y*200, (float)ft_atoi(vals[x])) == -1)
+			if (add_point(pts, x * 200, y * 200, (float)ft_atoi(vals[x])) == -1)
 				return (free_tab(vals), exit(1), -1);
-		}
 		free_tab(vals);
-		y++;
+		//y++;
 		line = get_next_line(fd);
 	}
 	close(fd);
