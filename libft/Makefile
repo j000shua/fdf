@@ -1,5 +1,7 @@
 NAME = libft.a
 
+INC = libft.h
+
 SRCS = ft_strlen.c \
        ft_isalpha.c \
        ft_isdigit.c \
@@ -34,7 +36,8 @@ SRCS = ft_strlen.c \
        ft_memmove.c \
        ft_strlcpy.c \
        ft_strlcat.c \
-	   get_next_line.c
+	   get_next_line.c \
+	   ft_fprintf.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -52,7 +55,7 @@ BONUS.O = ${BONUS.C:.c=.o}
 
 CFLAGS = -Wall -Wextra -Werror 
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} ${INC}
 	ar -rc ${NAME} ${OBJS}
 	ranlib ${NAME}
 

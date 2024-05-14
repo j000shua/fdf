@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 17:24:56 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/14 17:26:05 by jlinguet         ###   ########.fr       */
+/*   Created: 2024/05/14 16:11:23 by jlinguet          #+#    #+#             */
+/*   Updated: 2024/05/14 18:04:45 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,51 +27,41 @@ int	add_point(t_point **pts, float x, float y, float z)
 	return (0);
 }
 
-int	check_rect(t_point *pts)
+void	clear_pts(t_point **pts)
 {
-	int	x;
-	int	y;
+	t_point	*next;
 
-	if (pts == NULL)
-		return (0);
-	x = pts->x;
-	y = pts->y;
-	while (pts)
+	while (*pts)
 	{
-		if (pts->y == y - 1)
-		{
-			y--;
-			if (x != pts->x)
-				return (-1);
-		}
-		pts = pts -> next;
+		next = (*pts)->next;
+		free(*pts);
+		*pts = next;
 	}
-	return (0);
 }
 
 int	parse_file(int fd, t_point **pts)
 {
 	char	*line;
 	char	**vals;
+	int		lx;
 	int		x;
-	float	y;
+	int		y;
 
 	line = get_next_line(fd);
 	y = -1;
 	while (y++, line)
 	{
 		vals = ft_split(line, " \t\n\v\f\r");
-		//free(line);
 		if (free(line), !vals || !*vals)
-			return (free_tab(vals), -1);
+			return (clear_pts(pts), free_tab(vals), -1);
 		x = -1;
 		while (vals[++x])
-			if (add_point(pts, x * 200, y * 200, (float)ft_atoi(vals[x])) == -1)
-				return (free_tab(vals), exit(1), -1);
-		free_tab(vals);
-		//y++;
+			if (add_point(pts, x, y, ft_atoi(vals[x])) == -1)
+				return (clear_pts(pts), free_tab(vals), -1);
+		if (free_tab(vals), y > 0 && lx != x)
+			return (clear_pts(pts), -1);
+		lx = x;
 		line = get_next_line(fd);
 	}
-	close(fd);
-	return (check_rect(*pts));
+	return (0);
 }

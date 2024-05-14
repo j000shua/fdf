@@ -6,19 +6,26 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:31:18 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 10:53:23 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:29:35 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 # include <limits.h>
 
 typedef unsigned char	t_uchar;
+typedef unsigned int	t_uint;
+typedef unsigned long	t_ulong;
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -37,10 +44,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char *set);
 void	free_tab(char **tab);
 
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(char *s, int fd);
+int		ft_putendl_fd(char *s, int fd);
+int		ft_putnbr_fd(int n, int fd);
 
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -66,9 +73,8 @@ void	*ft_calloc(size_t nmemb, size_t size);
 
 char	*get_next_line(int fd);
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
-# endif
+int		ft_fprintf(int fd, const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 typedef struct s_list
 {

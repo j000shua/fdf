@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   MOI_get_next_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:10:45 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/07 12:00:08 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:16:17 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	reading(size_t *nbr, int *fd, char *buf, char **line)
 }
 
 #include <stdio.h>
+
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
@@ -84,24 +85,22 @@ char	*get_next_line(int fd)
 	size_t		nbr;
 
 	if (read(fd, buf, 0) < 0 || !set_up(buf, &line))
-		return (printf("oy1"),NULL);
+		return (NULL);
 	if (line)
-		return (printf("oy2"),line);
+		return (line);
 	line = ft_strdup(buf);
 	if (!line)
-		return (printf("oy3"),NULL);
+		return (NULL);
 	nbr = read(fd, buf, BUFFER_SIZE);
-	
 	if (!reading(&nbr, &fd, buf, &line))
-		return (printf("oy4"),NULL);
-	printf("buf = __%s__\n", buf);
+		return (NULL);
 	if (!nbr && buf[0])
-		return (ft_bzero(buf, 1),printf("oy5"), line);
+		return (ft_bzero(buf, 1), line);
 	if (!nbr)
-		return (free(line),printf("oy6"), NULL);
+		return (free(line), NULL);
 	buf[nbr] = 0;
 	if (!set_up(buf, &tmp))
-		return (printf("oy7"),NULL);
+		return (NULL);
 	line = ft_strjoin_gnl(line, tmp);
 	return (free(tmp), line);
 }
