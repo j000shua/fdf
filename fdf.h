@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/15 17:26:57 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:51:37 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_fdf {
 # define CROSS_BUTTON  17
 # define ECHAP_KEY     65307
 
-# define D45 0,785398
-# define D35 0,610865238
+# define D45 0.785398
+# define D35 0.610865238
 
 # define WIN_HEIGHT  1000
 # define WIN_WIDTH   1000
