@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/14 18:07:48 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:39:20 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,13 @@ typedef struct s_fdf {
 
 # define PIXEL_COLOR 255
 
-int		parse_file(int fd, t_point **pts);
+# define ERR_ARGS "Usage: ./fdf [MAP_NAME].fdf\n"
+# define ERR_FILE "Usage: Map file must end with '.fdf'\n"
+# define ERR_DIR  "%s: Is a directory\n"
+# define ERR_LINE "%s: Map must not have empty lines\n"
+# define ERR_RECT "%s: Map must be rectangle\n"
+
+int		parse_file(int fd, char *name, t_point **pts);
 void	clear_pts(t_point **pts);
 
 #endif
