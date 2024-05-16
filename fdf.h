@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/16 00:08:14 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:37:55 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 typedef struct s_point {
 	int				x;
 	int				y;
-	int				z;
+	float				z;
 	float			x_p;
 	float			y_p;
 	struct s_point	*next;
@@ -58,7 +58,7 @@ typedef struct s_fdf {
 
 # define WIN_HEIGHT  1000
 # define WIN_WIDTH   1000
-# define PIXEL_COLOR 255
+# define COLOR 255
 
 # define ERR_ARGS "Usage: ./fdf [MAP_NAME].fdf\n"
 # define ERR_FILE "Usage: Map file must end with '.fdf'\n"

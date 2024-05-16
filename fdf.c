@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/16 00:26:32 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:34:07 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,55 @@ void	print_points(t_point *lst)
 	i = 0;
 	while (lst)
 	{
-		printf("[point %i] x = %i, y = %i, z = %i\n",
+		printf("[point %i] x = %i, y = %i, z = %f\n",
 			i++, lst->x, lst->y, lst->z);
+		lst = lst->next;
+	}
+}
+
+void	print_points2D(t_point *lst)
+{
+	int	i;
+
+	// a enlever
+	i = 0;
+	while (lst)
+	{
+		printf("[point %i] x = %f, y = %f --- \n",
+			i++, lst->x_p, lst->y_p);
 		lst = lst->next;
 	}
 }
 
 void	magic(t_point *p)
 {
+	float	push_x;
+	float	push_y;
+	t_point *pp;
+
+	pp = &(*p);
+	push_x = p->x / 2;
+	push_y = p->y / 2;
 	while (p)
 	{
 		p->x_p = cos(D45) * p->x + -sin(D45) * p->z;
 		p->z = sin(D45) * p->x + cos(D45) * p->z;
 		p->y_p = cos(D35) * p->y + sin(D35) * p->z;
 		p->z = -sin(D35) * p->y + cos(D35) * p->z;
-		p->x_p = p->x_p * 50 + (WIN_WIDTH / 2 - p->x_p);
-		p->y_p = p->y_p * 50 + (WIN_HEIGHT / 2 - p->y_p);
+		p->x_p = p->x_p * 50;
+		p->y_p = p->y_p * 50;
+		if (p->x == push_x && p->y == push_y)
+		{
+			push_x = p->x_p;
+			push_y = p->y_p;
+		}
+		p = p->next;
+	}
+	p = pp;
+	while (p)
+	{
+		p->x_p += (WIN_WIDTH / 2 - push_x);
+		p->y_p += (WIN_HEIGHT / 2 - push_y);
 		p = p->next;
 	}
 }
@@ -68,8 +101,10 @@ int	main(int ac, char **av)
 	fd = check_file(ac, av);
 	if (fd == -1 || parse_file(fd, av[1], &pts) == -1)
 		return (clear_pts(&pts), 1);
-	//print_points(pts);
+	print_points(pts);
+	printf("\n\n");
 	magic(pts);
+	print_points2D(pts);
 	if (mlx_letsgo(pts, av[1]) == -1)
 		return (clear_pts(&pts), 1);
 	return (clear_pts(&pts), ft_printf("KO\n"), 0);
