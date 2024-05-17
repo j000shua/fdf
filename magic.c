@@ -6,56 +6,58 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 16:10:19 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/17 17:46:20 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:55:45 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	more_magic(t_point *p, t_transform t);
+
 void	magic(t_point *p)
 {
-	float	max_x;
-	float	min_x;
-	float	max_y;
-	float	min_y;
-	float	push_x;
-	float	push_y;
-	float	scal_x;
-	float	scal_y;
-	t_point	*pp;
+	t_transform		t;
+	t_point			*pp;
 
-	max_x = 0;
-	min_x = 0;
-	max_y = 0;
-	min_y = 0;
+	t.max_x = 0;
+	t.min_x = 0;
+	t.max_y = 0;
+	t.min_y = 0;
 	pp = &(*p);
 	while (p)
 	{
-		p->x_p = cos(D45) * p->x + -sin(D45) * p->z;
-		p->z = sin(D45) * p->x + cos(D45) * p->z;
-		p->y_p = cos(D35) * p->y + sin(D35) * p->z;
-		p->z = -sin(D35) * p->y + cos(D35) * p->z;
-		p->x_p *= 50;
-		p->y_p *= 50;
-		if (p->x_p > max_x)
-			max_x = p->x_p;
-		if (p->x_p < min_x)
-			min_x = p->x_p;
-		if (p->y_p > max_y)
-			max_y = p->y_p;
-		if (p->y_p < min_y)
-			min_y = p->y_p;
+		p->x_p = cos(DY) * p->x + -sin(DY) * p->z;
+		p->z = sin(DY) * p->x + cos(DY) * p->z;
+		p->y_p = cos(DX) * p->y + sin(DX) * p->z;
+		if (p->x_p > t.max_x)
+			t.max_x = p->x_p;
+		if (p->x_p < t.min_x)
+			t.min_x = p->x_p;
+		if (p->y_p > t.max_y)
+			t.max_y = p->y_p;
+		if (p->y_p < t.min_y)
+			t.min_y = p->y_p;
 		p = p->next;
 	}
-	scal_x = (WIN_WIDTH - 100) / (fabs(max_x) + fabs(min_x));
-	scal_y = (WIN_HEIGHT - 100) / (fabs(min_y) + fabs(max_y));
-	push_x = (max_x + min_x) / 2;
-	push_y = (max_y + min_y) / 2;
 	p = pp;
+	more_magic(p, t);
+}
+
+void	more_magic(t_point *p, t_transform t)
+{
+	float	w_margin;
+	float	h_margin;
+
+	w_margin = WIN_WIDTH * ((float)W_MARGIN / 100);
+	h_margin = WIN_HEIGHT * ((float)H_MARGIN / 100);
+	t.scal_x = (WIN_WIDTH - w_margin) / (fabs(t.max_x) + fabs(t.min_x));
+	t.scal_y = (WIN_HEIGHT - h_margin) / (fabs(t.min_y) + fabs(t.max_y));
+	t.push_x = (t.max_x + t.min_x) / 2;
+	t.push_y = (t.max_y + t.min_y) / 2;
 	while (p)
 	{
-		p->x_p = (p->x_p * scal_x) + (WIN_WIDTH / 2 - scal_x * push_x);
-		p->y_p = (p->y_p * scal_y) + (WIN_HEIGHT / 2 - scal_y * push_y);
+		p->x_p = (p->x_p * t.scal_x) + (WIN_WIDTH / 2 - t.scal_x * t.push_x);
+		p->y_p = (p->y_p * t.scal_y) + (WIN_HEIGHT / 2 - t.scal_y * t.push_y);
 		p = p->next;
 	}
 }

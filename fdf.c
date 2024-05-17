@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/17 17:50:57 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:47:21 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	parse_file(int fd, char *name, t_point **pts)
 	int		y;
 
 	line = get_next_line(fd);
+	if (line == NULL)
+		return (ft_fprintf(2, ERR_LINE, name), -1);
 	y = -1;
 	while (y++, line)
 	{
@@ -90,7 +92,7 @@ int	main(int ac, char **av)
 	int		fd;
 	t_point	*pts;
 
-	if (WIN_HEIGHT <= 0 || WIN_WIDTH <= 0)
+	if (WIN_HEIGHT <= 0 || WIN_WIDTH <= 0 || H_MARGIN < 0 || W_MARGIN < 0)
 		return (ft_fprintf(2, ERR_SIZE), 1);
 	pts = NULL;
 	fd = check_file(ac, av);
@@ -98,6 +100,5 @@ int	main(int ac, char **av)
 		return (clear_pts(&pts), 1);
 	magic(pts);
 	if (mlx_letsgo(pts, av[1]) == -1)
-		return (clear_pts(&pts), 1);
-	return (clear_pts(&pts), ft_printf("KO\n"), 0);
+		return (clear_pts(&pts), ft_fprintf(2, ERR_MLX), 1);
 }

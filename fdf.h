@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:43:01 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/17 17:51:26 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:55:44 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,30 @@ typedef struct s_fdf {
 	t_point	*pts;
 }	t_fdf;
 
+typedef struct s_transform
+{
+	float	max_x;
+	float	min_x;
+	float	max_y;
+	float	min_y;
+	float	push_x;
+	float	push_y;
+	float	scal_x;
+	float	scal_y;
+}	t_transform;
+
+# define DY 0.785398
+# define DX 0.610865238
+
 # define CROSS_CLICKED 131072
 # define CROSS_BUTTON  17
 # define ECHAP_KEY     65307
 
-# define D45 0.785398
-# define D35 0.610865238
-
 # define WIN_HEIGHT  1000
 # define WIN_WIDTH   1000
-# define COLOR 255
+# define H_MARGIN    10
+# define W_MARGIN    10
+# define COLOR       255
 
 # define ERR_SIZE "Window size is impossible (defined in fdf.h)\n"
 # define ERR_ARGS "Usage: ./fdf [MAP_NAME].fdf\n"
@@ -68,6 +82,7 @@ typedef struct s_fdf {
 # define ERR_DIR  "%s: Is a directory\n"
 # define ERR_LINE "%s: Map must not have empty lines\n"
 # define ERR_RECT "%s: Map must be rectangle\n"
+# define ERR_MLX  "An error has occured within the mlx functions\n"
 
 void	clear_pts(t_point **pts);
 
