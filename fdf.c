@@ -6,7 +6,7 @@
 /*   By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:37:33 by jlinguet          #+#    #+#             */
-/*   Updated: 2024/05/16 17:34:07 by jlinguet         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:50:57 by jlinguet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,65 +31,58 @@ int	check_file(int ac, char **av)
 	return (fd);
 }
 
-void	print_points(t_point *lst)
+int	add_point(t_point **pts, float x, float y, float z)
 {
-	int	i;
+	t_point	*new;
 
-	// a enlever
-	i = 0;
-	while (lst)
+	new = malloc(sizeof(t_point));
+	if (!new)
+		return (-1);
+	new->x = x;
+	new->y = y;
+	new->z = z;
+	new->next = *pts;
+	*pts = new;
+	return (0);
+}
+
+void	clear_pts(t_point **pts)
+{
+	t_point	*next;
+
+	while (*pts)
 	{
-		printf("[point %i] x = %i, y = %i, z = %f\n",
-			i++, lst->x, lst->y, lst->z);
-		lst = lst->next;
+		next = (*pts)->next;
+		free(*pts);
+		*pts = next;
 	}
 }
 
-void	print_points2D(t_point *lst)
+int	parse_file(int fd, char *name, t_point **pts)
 {
-	int	i;
+	char	*line;
+	char	**vals;
+	int		lx;
+	int		x;
+	int		y;
 
-	// a enlever
-	i = 0;
-	while (lst)
+	line = get_next_line(fd);
+	y = -1;
+	while (y++, line)
 	{
-		printf("[point %i] x = %f, y = %f --- \n",
-			i++, lst->x_p, lst->y_p);
-		lst = lst->next;
+		vals = ft_split(line, " \t\n\v\f\r");
+		if (free(line), !vals || !*vals)
+			return (free_tab(vals), ft_fprintf(2, ERR_LINE, name), -1);
+		x = -1;
+		while (vals[++x])
+			if (add_point(pts, x, y, ft_atoi(vals[x])) == -1)
+				return (free_tab(vals), perror("add_point()"), -1);
+		if (free_tab(vals), y > 0 && lx != x)
+			return (ft_fprintf(2, ERR_RECT, name), -1);
+		lx = x;
+		line = get_next_line(fd);
 	}
-}
-
-void	magic(t_point *p)
-{
-	float	push_x;
-	float	push_y;
-	t_point *pp;
-
-	pp = &(*p);
-	push_x = p->x / 2;
-	push_y = p->y / 2;
-	while (p)
-	{
-		p->x_p = cos(D45) * p->x + -sin(D45) * p->z;
-		p->z = sin(D45) * p->x + cos(D45) * p->z;
-		p->y_p = cos(D35) * p->y + sin(D35) * p->z;
-		p->z = -sin(D35) * p->y + cos(D35) * p->z;
-		p->x_p = p->x_p * 50;
-		p->y_p = p->y_p * 50;
-		if (p->x == push_x && p->y == push_y)
-		{
-			push_x = p->x_p;
-			push_y = p->y_p;
-		}
-		p = p->next;
-	}
-	p = pp;
-	while (p)
-	{
-		p->x_p += (WIN_WIDTH / 2 - push_x);
-		p->y_p += (WIN_HEIGHT / 2 - push_y);
-		p = p->next;
-	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -97,14 +90,13 @@ int	main(int ac, char **av)
 	int		fd;
 	t_point	*pts;
 
+	if (WIN_HEIGHT <= 0 || WIN_WIDTH <= 0)
+		return (ft_fprintf(2, ERR_SIZE), 1);
 	pts = NULL;
 	fd = check_file(ac, av);
 	if (fd == -1 || parse_file(fd, av[1], &pts) == -1)
 		return (clear_pts(&pts), 1);
-	print_points(pts);
-	printf("\n\n");
 	magic(pts);
-	print_points2D(pts);
 	if (mlx_letsgo(pts, av[1]) == -1)
 		return (clear_pts(&pts), 1);
 	return (clear_pts(&pts), ft_printf("KO\n"), 0);

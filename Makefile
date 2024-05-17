@@ -6,7 +6,7 @@
 #    By: jlinguet <jlinguet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/14 12:27:08 by jlinguet          #+#    #+#              #
-#    Updated: 2024/05/16 00:07:38 by jlinguet         ###   ########.fr        #
+#    Updated: 2024/05/17 17:47:55 by jlinguet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,16 @@ NAME = fdf
 INC = fdf.h
 
 SRC = fdf.c \
-	parse_file.c \
-	mlx_letsgo.c
+	magic.c \
+	mlx_letsgo.c \
+	my_pixel_put.c
 vpath %.c $(dir $(SRC))
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir ${SRC:.c=.o}))
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -I.
+CFLAGS = -Wall -Wextra -Werror -g3 -I. -Ilibft -I../mlx
 
 MLXFLAGS = -L../mlx -lmlx -lXext -lX11 -lm
 
